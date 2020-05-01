@@ -1,0 +1,46 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">{{#if selectedGenre}}{{selectedGenre}}{{else}}All{{/if}} Movies <i data-feather="loader" class="spin hidden" id="spinner"></i></h1>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-striped table-sm" id="movie-table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Genres</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+<script>
+    //get genre from the server-side render
+    let selectedGenre = '{{selectedGenre}}';
+    let url = '/rest/movies/' + (selectedGenre ? `byGenre/${selectedGenre}` : 'all');
+
+    //call REST service and render table
+    $(document).ready(function() {
+        $('#spinner').removeClass('hidden');
+        $.ajax(
+            url,
+            {
+                success: (movies, textStatus, jqXHR) => {
+                    let tbody = $('#movie-table tbody');
+                    tbody.empty();
+                    if(movies && movies.length) {
+                        movies.forEach(movie => {
+                            tbody.append(`<tr>
+                                <td>${movie.title}</td>
+                                <td>${movie.genres}</td>
+                            </tr>`);
+                        });
+                    }
+                },
+                complete: () => {
+                    $('#spinner').addClass('hidden');
+                }
+            }
+        );
+    });
+</script>
