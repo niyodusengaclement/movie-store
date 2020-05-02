@@ -8,6 +8,7 @@
             <tr>
                 <th>Title</th>
                 <th>Genres</th>
+                <th>Average Rating</th>
             </tr>
         </thead>
         <tbody></tbody>
@@ -30,10 +31,12 @@
                     tbody.empty();
                     if(movies && movies.length) {
                         movies.forEach(movie => {
+                            const genArray = `<span class="badge badge-pill badge-dark"> ${movie.genres.split('|')}</span>`                     
                             tbody.append(`<tr>
                                 <td>${movie.title}</td>
-                                <td>${movie.genres}</td>
-                            </tr>`);
+                                <td>${genArray}</td>
+                                <td>${movie.averageRating}</td>
+                            </tr>`); 
                         });
                     }
                 },

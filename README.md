@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/niyodusengaclement/CodeScreen_sxzgt3yz.svg?style=svg&circle-token=<9b7fd9465293f2e7e93b578c2c941a9b4529bd41>)](<https://circleci.com/gh/niyodusengaclement/CodeScreen_sxzgt3yz>)
+
 # One Movie Fund code test
 
 Welcome to our code test!
