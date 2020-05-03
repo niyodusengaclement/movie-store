@@ -1,17 +1,15 @@
 let express = require('express');
 let router = express.Router();
-
+const hbs = require('hbs');
 const path = require('path');
 const MovieService = require('../lib/movies');
 const movieService = new MovieService(path.join(__dirname, '..', 'movies.db'));
 const onError = require('../lib/response');
+require('../lib/hbsHelper')(hbs);
 
 router.get('/movies/all', function(req, res) {
   try {
     movieService.getAllMovies((err, movies) => {
-      if(err) {
-        console.log(err);
-      }
       res.status(200).json(movies);
     });
 
@@ -36,11 +34,29 @@ router.get('/movies/byGenre/:genre', function(req, res) {
 
 router.get('/movie/:id', function(req, res) {
   try {
-    movieService.getMovieDetails(req.params.id, (err, movie) => {
-      if(!movie) {
+    const id = parseInt(req.params.id, 10);
+    if(isNaN(id) || id < 1){
+      return onError(res, 400, 'Movie Id Should be Number which is not less than 1');
+    }
+    movieService.getMovieDetails(id, (err, movie) => {
+      if(!movie || movie.length < 1) {
         return onError(res, 404, 'Movie not found');
       }
-      return res.status(200).json(movie);
+      
+      const { title, genres } = movie[0];
+
+      const movieDetails = movie;
+
+
+    // try to render data
+    res.render('details', {
+      title: `One Movie Fund - ${title}`,
+      selectedMovie: title,
+      genres: MovieService.getGenres(),
+      movieDetails,
+      movieGenre: genres,
+    });
+    // data render ends
     });
   } catch(err) {
     return onError(res, 500, 'Internal Server Error');
