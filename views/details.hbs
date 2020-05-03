@@ -1,0 +1,28 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">{{selectedMovie}} <i data-feather="loader" class="spin hidden" id="spinner"></i></h1>
+</div>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+    <div class="pr-5">
+    <h6>Title: </h6> <p>{{selectedMovie}}</p>
+    <h6>Genres: </h6> <p id='genres'></p>
+    <h6>Recent 5 ratings: </h6> 
+            
+                {{#each movieDetails}}
+                 <p> {{{movie}}} </p>
+              {{/each}}
+    </div>
+</div>
+
+<script>
+    //get movie details from the server-side render
+    //Genres
+    const gen = '{{movieGenre}}';
+    const genres = gen.length > 0 ? gen.split('|') : [];
+    const genList = genres.length > 0 ? genres.map(gen =>
+        `<span class="badge badge-pill badge-dark"> ${gen}</span>`
+    ) : '';
+    const el = document.getElementById('genres');
+    el.innerHTML = genList;
+
+
+</script>

@@ -4,11 +4,10 @@
   "private": true,
   "scripts": {
     "start": "node app.js",
-    "test": "nyc --reporter=text mocha tests",
+    "test": "nyc --reporter=html --reporter=text mocha tests",
     "task-kill": "Taskkill /IM node.exe /F",
     "dev": "nodemon app.js",
-    "coverage": "nyc --reporter=html --reporter=text mocha tests",
-    "coveralls": "nyc report --reporter=text-lcov | coveralls"
+    "coverage": "nyc --reporter=html --reporter=text mocha tests"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

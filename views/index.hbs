@@ -31,12 +31,20 @@
                     tbody.empty();
                     if(movies && movies.length) {
                         movies.forEach(movie => {
-                            const genArray = `<span class="badge badge-pill badge-dark"> ${movie.genres.split('|')}</span>`                     
+                            const genArray = movie.genres.split('|');
+                            const gen = genArray.length > 0 ? genArray.map(genre =>
+                            `<span class="badge badge-pill badge-dark">${genre}</span>`
+                            ) : '';                     
                             tbody.append(`<tr>
-                                <td>${movie.title}</td>
-                                <td>${genArray}</td>
+                                <td>
+                                  <a class="" href="/rest/movie/${movie.id}">
+                                  <span data-feather="star"></span>
+                                  ${movie.title}
+                                   </a>
+                                </td>
+                                <td>${gen}</td>
                                 <td>${movie.averageRating}</td>
-                            </tr>`); 
+                            </tr>`);
                         });
                     }
                 },
