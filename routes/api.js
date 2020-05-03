@@ -47,16 +47,14 @@ router.get('/movie/:id', function(req, res) {
 
       const movieDetails = movie;
 
-
-    // try to render data
-    res.render('details', {
-      title: `One Movie Fund - ${title}`,
-      selectedMovie: title,
-      genres: MovieService.getGenres(),
-      movieDetails,
-      movieGenre: genres,
-    });
-    // data render ends
+      // try to render data
+      res.render('details', {
+        title: `One Movie Fund - ${title}`,
+        selectedMovie: title,
+        genres: MovieService.getGenres(),
+        movieDetails,
+        movieGenre: genres,
+      });
     });
   } catch(err) {
     return onError(res, 500, 'Internal Server Error');

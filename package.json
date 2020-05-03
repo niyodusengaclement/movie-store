@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "start": "node app.js",
-    "test": "nyc --reporter=html --reporter=text mocha tests",
+    "test": "mocha --timeout=10000 tests",
     "task-kill": "Taskkill /IM node.exe /F",
     "dev": "nodemon app.js",
-    "coverage": "nyc --reporter=html --reporter=text mocha tests"
+    "coverage": "nyc --reporter=html --reporter=text mocha --timeout=10000 tests"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -20,7 +20,6 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
-    "coveralls": "^3.1.0",
     "imgur": "^0.3.1",
     "mocha": "^7.1.2",
     "mocha-eslint": "^6.0.0",
